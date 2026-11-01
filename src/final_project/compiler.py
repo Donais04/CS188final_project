@@ -1,12 +1,3 @@
-def program_split(self, program):
-    program = "li $t0 3\naddi $t1 $t0 5"
-
-    program_lines = program.split("\n")
-    program_words = []
-    for i in range(len(program_lines)):
-        program_words.append(program_lines[i].split(" "))
-    return program_words
-
 class Compiler:
     def __init__(self):
         self.registers = {
@@ -20,7 +11,7 @@ class Compiler:
             "$gp": 0, "$sp": 0, "$fp": 0, "$ra": 0
         }
 
-    def program_split(program):
+    def program_split(self, program: str) -> list:
         """Divides the program from ne big string into a list of individual words"""
         program_lines = program.split("\n")
         program_words = []
@@ -28,11 +19,32 @@ class Compiler:
             program_words.append(program_lines[i].split(" "))
         return program_words
 
-    def compile(self, program):
+    def compile(self, program: str):
         program = "li $t0 3\naddi $t1 $t0 5"
         program = self.program_split(program)
+
+        function_dictionary = {
+            "li": self.func_li, "addi": self.func_addi
+        }
+
         for i in range(len(program)):
-            if program[i][0] == "li":
-                func_li(program[i])
-            elif program[i][0] == "addi":
-                func_addi(program[i])
+            args = program[i]
+            args.pop(0)
+            function_dictionary[program[i][0]](args)
+
+    def func_li(self, args: list) -> None:
+        """
+            load immediate
+            args[0] = destination register
+            args[1] = what value
+        """
+        self.registers[args[0]] = args[1]
+
+    def func_addi(self, args: list) -> None:
+        """
+            add immediate
+            args[0] = destination register
+            args[1] = addend register
+            args[2] = addend immediate
+        """
+        self.registers[args[0]] = self.registers[args[1]] + args[2]
