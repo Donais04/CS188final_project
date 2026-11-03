@@ -5,7 +5,7 @@
 #}
 <div class="ms-auto d-flex align-items-center gap-2">
   {% if current_user %}
-    <span class="navbar-text">Signed in as {{ current_user.display_name }}</span>
+    <span class="navbar-text">Signed in as {{ current_user.displayname }}</span>
     <button type="button" id="logoutButton" class="btn btn-outline-danger btn-sm">Log out</button>
   {% else %}
     <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>

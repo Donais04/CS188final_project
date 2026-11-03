@@ -1,13 +1,15 @@
 from contextlib import closing
 import datetime
 import sqlite3
-import mssql_python
+#import mssql_python
 from flask import Flask, g
 from .__constants import CONNECTION_STRING_VARIABLE, SESSION_LIFETIME_SECONDS
-import os
+#import os
 
 def connect(db_name):
-    return sqlite3.connect(db_name)
+    returner = sqlite3.connect(db_name)
+    returner.row_factory = sqlite3.Row
+    return returner
 
 class Database:
     def __init__(self, db_name):
@@ -87,8 +89,8 @@ class Database:
         """Update the last login time for the specified user."""
         with self.conn:
                 self.conn.execute(
-                "UPDATE Users SET last_login = GETDATE() WHERE username = ?",
-                (username,),
+                "UPDATE Users SET last_login = ? WHERE username = ?",
+                (datetime.datetime.now(), username)
             )
         self.conn.commit()
 
@@ -110,6 +112,7 @@ class Database:
                 )
                 )
                 session_id = str(self.conn.execute("SELECT sessionid FROM sessions WHERE userid = ?", (user_id,)).fetchall()[-1][0])
+                print("115",str(self.conn.execute("SELECT * FROM sessions WHERE userid = ?", (user_id,)).fetchall()[-1]['userid']))
         self.conn.commit()
         return session_id
 
@@ -129,14 +132,19 @@ class Database:
         """Return the logged-in user's info for a session, or None if the session doesn't exist."""
         try:
             with self.conn:
-                userid = self.conn.execute("SELECT userid, expiry FROM sessions WHERE sessionid = ?",(session_id,)).fetchone()
-                print("135",userid)
-                user = self.conn.execute("SELECT * FROM users WHERE username = ?",(userid[0],)).fetchone()
-                print("138", self.conn.execute("SELECT * FROM sessions").fetchall(), user)
-                #if user and userid[1] < datetime.datetime.now():
-                #    print("104here")
-                #    self.delete_session(session_id)
-                #    return None
+                user = self.conn.execute(
+                """
+                SELECT Users.id, Users.username, Users.displayname, Users.last_login,
+                       Sessions.sessionid, Sessions.expiry
+                FROM Sessions
+                JOIN Users ON Users.id = Sessions.userid
+                WHERE Sessions.sessionid = ?
+                """,
+                (session_id,),
+                ).fetchone()
+                if datetime.datetime.strptime(user['expiry'][:user['expiry'].rfind('.')], "%Y-%m-%d %H:%M:%S") < datetime.datetime.now():
+                    self.delete_session(session_id)
+                    return None
                 return user
         except sqlite3.IntegrityError:
             return None

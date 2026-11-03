@@ -116,14 +116,14 @@ class Login(Resource):
         print(f"username: {username}, password: {password}")
         login_info = get_db().get_login_info(username)
         print(f"login_info: {login_info}")
-        if not login_info or not check_password_hash(login_info[1], password):
+        if not login_info or not check_password_hash(login_info["password"], password):
             return {"message": BAD_LOGIN_MESSAGE}, 401
         #get_db().update_last_login(username)
-        session_id = get_db().create_session(login_info[2])
+        session_id = get_db().create_session(login_info["id"])
         response = make_response(
             {
-                "message": f"Welcome back, {login_info[2]}! Last login: {login_info[3]}",
-                "displayName": login_info[2],
+                "message": f"Welcome back, {login_info['displayname']}! Last login: {login_info['last_login']}",
+                "displayName": login_info["displayname"],
             },
             200,
         )
