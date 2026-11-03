@@ -3,6 +3,7 @@ import datetime
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, abort, render_template
 
+from final_project.compiler import Compiler
 # from final_project import auth, db, sessions
 # from final_project._constants import SECRET_ENV_FILE
 # from final_project.sessions import login_required
@@ -18,6 +19,13 @@ def create_app():
     return app
 
 def hello():
+    compiler_obj = Compiler()
+    program = "li $t0 3\naddi $t1 $t0 5"
+
+    print(compiler_obj.get_registers())
+    compiler_obj.compile(program)
+    print(compiler_obj.get_registers())
+
     return render_template("hello.html")
 
 def setup_routes(app):

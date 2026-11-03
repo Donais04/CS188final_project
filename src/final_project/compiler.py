@@ -2,7 +2,7 @@ class Compiler:
     def __init__(self):
         self.registers = {
             "$zero": 0, "$at": 0, "$v0": 0, "$v1": 0, 
-            "$a0": 0, "$a1":0, "$a2": 0, "$a3": 0, 
+            "$a0": 0, "$a1": 0, "$a2": 0, "$a3": 0, 
             "$t0": 0, "$t1": 0, "$t2": 0, "$t3": 0,
             "$t4": 0, "$t5": 0, "$t6": 0, "$t7": 0,
             "$s0": 0, "$s1": 0, "$s2": 0, "$s3": 0,
@@ -11,26 +11,33 @@ class Compiler:
             "$gp": 0, "$sp": 0, "$fp": 0, "$ra": 0
         }
 
+    def get_registers(self):
+        return self.registers
+
     def program_split(self, program: str) -> list:
-        """Divides the program from ne big string into a list of individual words"""
+        """Divides the program from a big string into a list of individual words and floats"""
         program_lines = program.split("\n")
         program_words = []
         for i in range(len(program_lines)):
             program_words.append(program_lines[i].split(" "))
+            for j in range(len(program_words[i])):
+                try:
+                    program_words[i][j] = float(program_words[i][j])
+                except:
+                    pass
         return program_words
 
     def compile(self, program: str):
-        program = "li $t0 3\naddi $t1 $t0 5"
-        program = self.program_split(program)
+        program_list = self.program_split(program)
 
         function_dictionary = {
             "li": self.func_li, "addi": self.func_addi
         }
 
-        for i in range(len(program)):
-            args = program[i]
+        for i in range(len(program_list)):
+            args = program_list[i].copy()
             args.pop(0)
-            function_dictionary[program[i][0]](args)
+            function_dictionary[program_list[i][0]](args)
 
     def func_li(self, args: list) -> None:
         """
