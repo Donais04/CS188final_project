@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block title %}MIPS Code Editor{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-1">
+            {% include "components/sidebar.html" %}
+        </div>
+
+        <!-- Main  -->
+        <div class="col-md-7">
+
+            {% include "components/code_editor.html" %}
+
+            {% include "components/output_console.html" %}
+
+        </div>
+
+        <!-- Registers -->
+        <div class="col-md-4">
+            {% include "components/register_panel.html" %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

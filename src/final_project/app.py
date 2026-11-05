@@ -17,11 +17,17 @@ def create_app():
     setup_routes(app)
     return app
 
-def hello():
-    return render_template("hello.html")
+
+def mainScreen():
+    return render_template("mainScreen.html")
+
+def loginScreen():
+    return render_template("loginScreen.html")
 
 def setup_routes(app):
-    app.route("/")(hello)
+    app.route("/")(mainScreen)
+    app.route("/loginScreen")(loginScreen)
+
 
 def run_app(debug: bool = True) -> None:
     app = create_app()
