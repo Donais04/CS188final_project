@@ -12,7 +12,7 @@ from flask import Flask, request, make_response
 from flask_bcrypt import check_password_hash, generate_password_hash
 from flask_restful import Api, Resource
 from .sessions import clear_session_cookie, set_session_cookie, verify_session_cookie
-from .db import Database, get_db
+from .db import get_db
 
 from .__constants import (
     BAD_LOGIN_MESSAGE,
@@ -21,7 +21,6 @@ from .__constants import (
     PASSWORD_PATTERN,
     USERNAME_PATTERN,
 )
-from .db import get_db
 
 
 def get_json_body() -> dict:
@@ -76,7 +75,6 @@ class Register(Resource):
         password = data["password"]
         display_name = data["displayName"].strip()
 
-        # Validate everything we can before touching the database.
         is_valid, message = validate_username(username)
         if not is_valid:
             return {"message": message}, 400
@@ -92,9 +90,6 @@ class Register(Resource):
         if db.username_exists(username):
             return {"message": "Username already exists"}, 400
 
-        # Hash the password only after the cheaper checks pass. bcrypt is slow on
-        # purpose (that's what makes it hard to crack), so we don't want to waste
-        # that time on a request we're going to reject.
         hashed_password = generate_password_hash(password).decode("utf-8")
 
         if not db.add_user(username, hashed_password, display_name):

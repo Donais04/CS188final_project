@@ -15,7 +15,7 @@ from final_project.auth import setup_auth
 from final_project.sessions import login_required, setup_sessions
 
 
-def create_app():
+def create_app(dbName = "testing.db"):
     load_dotenv(find_dotenv(SECRET_ENV_FILE))
     app = Flask(__name__)
     setup_for_app(app)

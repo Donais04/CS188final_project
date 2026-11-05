@@ -6,6 +6,8 @@ from flask import Flask, g
 from .__constants import CONNECTION_STRING_VARIABLE, SESSION_LIFETIME_SECONDS
 #import os
 
+_DATABASE_NAME = "testing.db"
+
 def connect(db_name):
     returner = sqlite3.connect(db_name)
     returner.row_factory = sqlite3.Row
@@ -142,6 +144,8 @@ class Database:
                 """,
                 (session_id,),
                 ).fetchone()
+                if not(user):
+                    return None
                 if datetime.datetime.strptime(user['expiry'][:user['expiry'].rfind('.')], "%Y-%m-%d %H:%M:%S") < datetime.datetime.now():
                     self.delete_session(session_id)
                     return None
@@ -202,7 +206,7 @@ class Database:
 def get_db() -> Database:
     """Return this request's Database, connecting on first use."""
     if "db" not in g:
-        g.db = Database("testing.db")#mssql_python.connect(os.environ[CONNECTION_STRING_VARIABLE]))
+        g.db = Database(_DATABASE_NAME)#mssql_python.connect(os.environ[CONNECTION_STRING_VARIABLE]))
     return g.db
 
 def close_db(exception: BaseException | None = None) -> None:
@@ -220,3 +224,6 @@ def close_db(exception: BaseException | None = None) -> None:
 def setup_for_app(app: Flask) -> None:
     """Hook the database into the app. Call this from create_app()."""
     app.teardown_appcontext(close_db)
+
+def changeDB(name: str):
+    _DATABASE_NAME = name
