@@ -20,7 +20,7 @@ def create_app():
 
 def hello():
     compiler_obj = Compiler()
-    program = "li $t0 3\naddi $t1 $t0 5"
+    program = "li $t0 3\naddi $t1 $t0 5\nmul $t2 $t0 $t1"
 
     print(compiler_obj.get_registers())
     compiler_obj.compile(program)
