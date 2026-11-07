@@ -4,6 +4,7 @@ from dotenv import find_dotenv, load_dotenv
 from flask import Flask, abort, render_template
 
 from final_project.compiler import Compiler
+
 # from final_project import auth, db, sessions
 # from final_project._constants import SECRET_ENV_FILE
 # from final_project.sessions import login_required
@@ -20,7 +21,9 @@ def create_app():
 
 def hello():
     compiler_obj = Compiler()
-    program = "li $t0 3\naddi $t1 $t0 5\nmul $t2 $t0 $t1"
+    # program = "li $t0 10\nli $t1 5\nmul $t2 $t0 $t1\nmult $t0 $t1"
+    # program = "li $t0 4294967295\nli $t1 2\nmul $t2 $t0 $t1"
+    program = "li $t0 -2\nli $t1 3\nmult $t0 $t1"
 
     compiler_obj.print_registers()
     compiler_obj.compile(program)

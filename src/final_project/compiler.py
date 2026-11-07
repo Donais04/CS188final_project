@@ -1,16 +1,18 @@
 from final_project.custom_datatypes import Int_32_Bit
 
+
 class Compiler:
     def __init__(self):
         self.registers = {
-            "$zero": Int_32_Bit(0), "$at": Int_32_Bit(0), "$v0": Int_32_Bit(0), "$v1": Int_32_Bit(0), 
-            "$a0": Int_32_Bit(0), "$a1": Int_32_Bit(0), "$a2": Int_32_Bit(0), "$a3": Int_32_Bit(0),
-            "$t0": Int_32_Bit(0), "$t1": Int_32_Bit(0), "$t2": Int_32_Bit(0), "$t3": Int_32_Bit(0),
-            "$t4": Int_32_Bit(0), "$t5": Int_32_Bit(0), "$t6": Int_32_Bit(0), "$t7": Int_32_Bit(0),
-            "$s0": Int_32_Bit(0), "$s1": Int_32_Bit(0), "$s2": Int_32_Bit(0), "$s3": Int_32_Bit(0),
-            "$s4": Int_32_Bit(0), "$s5": Int_32_Bit(0), "$s6": Int_32_Bit(0), "$s7": Int_32_Bit(0),
-            "$t8": Int_32_Bit(0), "$t9": Int_32_Bit(0), "$k0": Int_32_Bit(0), "$k1": Int_32_Bit(0),
-            "$gp": Int_32_Bit(0), "$sp": Int_32_Bit(0), "$fp": Int_32_Bit(0), "$ra": Int_32_Bit(0)
+            "$zero": Int_32_Bit(), "$at": Int_32_Bit(), "$v0": Int_32_Bit(), "$v1": Int_32_Bit(), 
+            "$a0": Int_32_Bit(), "$a1": Int_32_Bit(), "$a2": Int_32_Bit(), "$a3": Int_32_Bit(),
+            "$t0": Int_32_Bit(), "$t1": Int_32_Bit(), "$t2": Int_32_Bit(), "$t3": Int_32_Bit(),
+            "$t4": Int_32_Bit(), "$t5": Int_32_Bit(), "$t6": Int_32_Bit(), "$t7": Int_32_Bit(),
+            "$s0": Int_32_Bit(), "$s1": Int_32_Bit(), "$s2": Int_32_Bit(), "$s3": Int_32_Bit(),
+            "$s4": Int_32_Bit(), "$s5": Int_32_Bit(), "$s6": Int_32_Bit(), "$s7": Int_32_Bit(),
+            "$t8": Int_32_Bit(), "$t9": Int_32_Bit(), "$k0": Int_32_Bit(), "$k1": Int_32_Bit(),
+            "$gp": Int_32_Bit(), "$sp": Int_32_Bit(), "$fp": Int_32_Bit(), "$ra": Int_32_Bit(),
+            "$pc": Int_32_Bit(), "$hi": Int_32_Bit(), "$lo": Int_32_Bit()
         }
 
     def set_register(self, destination_register: str, value: int):
@@ -43,7 +45,7 @@ class Compiler:
 
         # https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf
         instruction_dictionary = {
-            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "li": self.instr_li
+            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "li": self.instr_li
         }
 
         for i in range(len(program_list)):
@@ -94,6 +96,33 @@ class Compiler:
         register_1 = self.registers[args[1]].get_value()
         register_2 = self.registers[args[2]].get_value()
         self.set_register(args[0], register_1 * register_2)
+
+    def instr_mult(self, args: list) -> None:
+        """
+            multiply
+            args[0] = factor register Sr.
+            args[1] = factor register Jr.
+            upper 32 bits stored in special register hi, lower 32 bits in lo
+        """
+
+        MASK = 0xFFFFFFFF # ChatGPT taught me how bitmasks work
+
+        register_1 = self.registers[args[0]].get_value()
+        register_2 = self.registers[args[1]].get_value()
+
+        # Convert to signed 32-bit integers
+        if register_1 & 0x80000000:
+            register_1 -= 0x100000000
+
+        if register_2 & 0x80000000:
+            register_2 -= 0x100000000
+
+        product = register_1 * register_2
+
+        self.set_register("$lo", (product & MASK))
+        self.set_register("$hi", ((product >> 32) & MASK))
+        
+
 
     def instr_li(self, args: list) -> None:
         """
