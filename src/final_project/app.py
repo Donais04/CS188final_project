@@ -22,9 +22,9 @@ def hello():
     compiler_obj = Compiler()
     program = "li $t0 3\naddi $t1 $t0 5\nmul $t2 $t0 $t1"
 
-    print(compiler_obj.get_registers())
+    compiler_obj.print_registers()
     compiler_obj.compile(program)
-    print(compiler_obj.get_registers())
+    compiler_obj.print_registers()
 
     return render_template("hello.html")
 

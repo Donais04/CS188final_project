@@ -1,21 +1,29 @@
+from final_project.custom_datatypes import Int_32_Bit
+
 class Compiler:
     def __init__(self):
         self.registers = {
-            "$zero": 0, "$at": 0, "$v0": 0, "$v1": 0, 
-            "$a0": 0, "$a1": 0, "$a2": 0, "$a3": 0,
-            "$t0": 0, "$t1": 0, "$t2": 0, "$t3": 0,
-            "$t4": 0, "$t5": 0, "$t6": 0, "$t7": 0,
-            "$s0": 0, "$s1": 0, "$s2": 0, "$s3": 0,
-            "$s4": 0, "$s5": 0, "$s6": 0, "$s7": 0,
-            "$t8": 0, "$t9": 0, "$k0": 0, "$k1": 0,
-            "$gp": 0, "$sp": 0, "$fp": 0, "$ra": 0
+            "$zero": Int_32_Bit(0), "$at": Int_32_Bit(0), "$v0": Int_32_Bit(0), "$v1": Int_32_Bit(0), 
+            "$a0": Int_32_Bit(0), "$a1": Int_32_Bit(0), "$a2": Int_32_Bit(0), "$a3": Int_32_Bit(0),
+            "$t0": Int_32_Bit(0), "$t1": Int_32_Bit(0), "$t2": Int_32_Bit(0), "$t3": Int_32_Bit(0),
+            "$t4": Int_32_Bit(0), "$t5": Int_32_Bit(0), "$t6": Int_32_Bit(0), "$t7": Int_32_Bit(0),
+            "$s0": Int_32_Bit(0), "$s1": Int_32_Bit(0), "$s2": Int_32_Bit(0), "$s3": Int_32_Bit(0),
+            "$s4": Int_32_Bit(0), "$s5": Int_32_Bit(0), "$s6": Int_32_Bit(0), "$s7": Int_32_Bit(0),
+            "$t8": Int_32_Bit(0), "$t9": Int_32_Bit(0), "$k0": Int_32_Bit(0), "$k1": Int_32_Bit(0),
+            "$gp": Int_32_Bit(0), "$sp": Int_32_Bit(0), "$fp": Int_32_Bit(0), "$ra": Int_32_Bit(0)
         }
 
-    def update_register(self, destination_register: str, value: int):
-        self.registers[destination_register] = value
+    def set_register(self, destination_register: str, value: int):
+        self.registers[destination_register].set_value(value)
 
     def get_registers(self):
         return self.registers
+
+    def print_registers(self) -> None:
+        print("### Start ###")
+        for i in self.registers:
+            print(i, self.registers[i].get_value())
+        print("### End ###")
 
     def program_split(self, program: str) -> list:
         """Divides the program from a big string into a list of individual words and floats"""
@@ -50,7 +58,9 @@ class Compiler:
             args[1] = addend register
             args[2] = addend register 2 judgement day
         """
-        self.update_register(args[0], self.registers[args[1]] + self.registers[args[2]])
+        register_1 = self.registers[args[1]].get_value()
+        register_2 = self.registers[args[2]].get_value()
+        self.set_register(args[0], register_1 + register_2)
 
     def instr_sub(self, args: list) -> None:
         """
@@ -60,7 +70,9 @@ class Compiler:
             args[2] = subtrahend register
             (minuend - subtrahend = difference)
         """
-        self.update_register(args[0], self.registers[args[1]] - self.registers[args[2]])
+        register_1 = self.registers[args[1]].get_value()
+        register_2 = self.registers[args[2]].get_value()
+        self.set_register(args[0], register_1 - register_2)
 
     def instr_addi(self, args: list) -> None:
         """
@@ -69,7 +81,8 @@ class Compiler:
             args[1] = addend register
             args[2] = addend immediate
         """
-        self.update_register(args[0], self.registers[args[1]] + args[2])
+        register_1 = self.registers[args[1]].get_value()
+        self.set_register(args[0], register_1 + args[2])
 
     def instr_mul(self, args: list) -> None:
         """
@@ -78,7 +91,9 @@ class Compiler:
             args[1] = factor register
             args[2] = factor register 2 electric boogaloo
         """
-        self.update_register(args[0], self.registers[args[1]] * self.registers[args[2]])
+        register_1 = self.registers[args[1]].get_value()
+        register_2 = self.registers[args[2]].get_value()
+        self.set_register(args[0], register_1 * register_2)
 
     def instr_li(self, args: list) -> None:
         """
@@ -86,4 +101,4 @@ class Compiler:
             args[0] = destination register
             args[1] = what value
         """
-        self.update_register(args[0], args[1])
+        self.set_register(args[0], args[1])
