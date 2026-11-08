@@ -24,8 +24,16 @@ class Compiler:
     def print_registers(self) -> None:
         print("### Start ###")
         for i in self.registers:
-            print(i, self.registers[i].get_value())
+            print(i, self.get_signed_value(self.registers[i].get_value()))
         print("### End ###")
+
+    def get_signed_value(self, value) -> int:
+        """
+            converts values into their signed versions. Made by ChatGPT
+        """
+        if value & 0x80000000:
+            return value - 0x100000000
+        return value
 
     def program_split(self, program: str) -> list:
         """Divides the program from a big string into a list of individual words and floats"""
@@ -45,7 +53,8 @@ class Compiler:
 
         # https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf
         instruction_dictionary = {
-            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "li": self.instr_li
+            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "li": self.instr_li,
+            "div": self.instr_div
         }
 
         for i in range(len(program_list)):
@@ -121,6 +130,35 @@ class Compiler:
 
         self.set_register("$lo", (product & MASK))
         self.set_register("$hi", ((product >> 32) & MASK))
+
+    def instr_div(self, args: list) -> None:
+        """
+            divide
+            args[0] = dividend register
+            args[1] = divisor register
+            quotient stored in special register lo, remainder in hi
+        """
+        MASK = 0xFFFFFFFF # ChatGPT taught me how bitmasks work
+        
+        register_1 = self.registers[args[0]].get_value()
+        register_2 = self.registers[args[1]].get_value()
+
+        # Convert to signed 32-bit integers
+        register_1 = self.get_signed_value(register_1)
+        register_2 = self.get_signed_value(register_2)
+
+        if register_2 == 0:
+            raise ZeroDivisionError("Division by zero error")
+
+        quotient = abs(register_1) // abs(register_2)
+
+        if (register_1 < 0) != (register_2 < 0):
+            quotient = -quotient
+
+        remainder = register_1 - (quotient * register_2)
+
+        self.set_register("$lo", (quotient & MASK))
+        self.set_register("$hi", (remainder & MASK))
         
 
 

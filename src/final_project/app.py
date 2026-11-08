@@ -22,8 +22,8 @@ def create_app():
 def hello():
     compiler_obj = Compiler()
     # program = "li $t0 10\nli $t1 5\nmul $t2 $t0 $t1\nmult $t0 $t1"
-    # program = "li $t0 4294967295\nli $t1 2\nmul $t2 $t0 $t1"
-    program = "li $t0 -2\nli $t1 3\nmult $t0 $t1"
+    # program = "li $t0 4294967295\nli $t1 2\nmult $t0 $t1"
+    program = "li $t0 -17\nli $t1 5\ndiv $t0 $t1"
 
     compiler_obj.print_registers()
     compiler_obj.compile(program)
