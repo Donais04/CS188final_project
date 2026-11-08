@@ -54,7 +54,7 @@ class Compiler:
         # https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf
         instruction_dictionary = {
             "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "li": self.instr_li,
-            "div": self.instr_div
+            "div": self.instr_div, "and": self.instr_and, "or": self.instr_or, "andi": self.instr_andi, "ori": self.instr_ori
         }
 
         for i in range(len(program_list)):
@@ -159,8 +159,52 @@ class Compiler:
 
         self.set_register("$lo", (quotient & MASK))
         self.set_register("$hi", (remainder & MASK))
-        
 
+    def instr_and(self, args: list) -> None:
+        """
+            bitwise and
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = operand register squared
+        """
+        register_1 = self.registers[args[1]].get_value()
+        register_2 = self.registers[args[2]].get_value()
+
+        self.set_register(args[0], register_1 & register_2)
+
+    def instr_or(self, args: list) -> None:
+        """
+            bitwise or
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = operand register 2 (I'm running out of sequel jokes)
+        """
+        register_1 = self.registers[args[1]].get_value()
+        register_2 = self.registers[args[2]].get_value()
+
+        self.set_register(args[0], register_1 | register_2)
+
+    def instr_andi(self, args: list) -> None:
+        """
+            bitwise and immediate
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = operand immediate
+        """
+        register_1 = self.registers[args[1]].get_value()
+
+        self.set_register(args[0], register_1 & args[2])
+
+    def instr_ori(self, args: list) -> None:
+        """
+            bitwise or immediate
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = operand immediate
+        """
+        register_1 = self.registers[args[1]].get_value()
+
+        self.set_register(args[0], register_1 | args[2])
 
     def instr_li(self, args: list) -> None:
         """
