@@ -5,29 +5,29 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row">
+<div class="workspace">
 
-        <!-- Sidebar -->
-        <div class="col-md-1">
-            {% include "components/sidebar.html" %}
-        </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        {% include "components/sidebar.html" %}
+    </aside>
 
-        <!-- Main  -->
-        <div class="col-md-7">
+    <!-- Main Editor -->
+    <main class="main-workspace">
 
-            {% include "components/code_editor.html" %}
+        {% include "components/toolbar.html" %}
 
-            {% include "components/output_console.html" %}
+        {% include "components/code_editor.html" %}
 
-        </div>
+        {% include "components/output_console.html" %}
 
-        <!-- Registers -->
-        <div class="col-md-4">
-            {% include "components/register_panel.html" %}
-        </div>
+    </main>
 
-    </div>
+    <!-- Registers -->
+    <aside class="registers">
+        {% include "components/register_panel.html" %}
+    </aside>
+
 </div>
 
 {% endblock %}
