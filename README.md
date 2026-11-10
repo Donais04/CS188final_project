@@ -26,4 +26,4 @@ Features are below:
 - public projects that you can scroll through
 - directories of projects
 
-#### Authors: Brandon Valadez (@brandonv1337), ..., ..., ..., 
+#### Authors: Brandon Valadez (@brandonv1337), Iris Donais (@Donais04), Bernardo Martinez (@CallingBoar), Dalila Hernandez (@dhernandez24)
