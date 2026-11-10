@@ -53,8 +53,9 @@ class Compiler:
 
         # https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf
         instruction_dictionary = {
-            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "li": self.instr_li,
-            "div": self.instr_div, "and": self.instr_and, "or": self.instr_or, "andi": self.instr_andi, "ori": self.instr_ori
+            "add": self.instr_add, "sub": self.instr_sub, "addi": self.instr_addi, "mul": self.instr_mul, "mult": self.instr_mult, "div": self.instr_div,
+            "and": self.instr_and, "or": self.instr_or, "andi": self.instr_andi, "ori": self.instr_ori, "sll": self.instr_sll, "srl": self.instr_srl,
+            "li": self.instr_li
         }
 
         for i in range(len(program_list)):
@@ -113,7 +114,6 @@ class Compiler:
             args[1] = factor register Jr.
             upper 32 bits stored in special register hi, lower 32 bits in lo
         """
-
         MASK = 0xFFFFFFFF # ChatGPT taught me how bitmasks work
 
         register_1 = self.registers[args[0]].get_value()
@@ -205,6 +205,28 @@ class Compiler:
         register_1 = self.registers[args[1]].get_value()
 
         self.set_register(args[0], register_1 | args[2])
+
+    def instr_sll(self, args: list) -> None:
+        """
+            shift left logical
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = constant number of bits to shift by
+        """
+        register_1 = self.registers[args[1]].get_value()
+
+        self.set_register(args[0], register_1 << args[2])
+
+    def instr_srl(self, args: list) -> None:
+        """
+            shift right logical
+            args[0] = destination register
+            args[1] = operand register
+            args[2] = constant number of bits to shift by
+        """
+        register_1 = self.registers[args[1]].get_value()
+
+        self.set_register(args[0], register_1 >> args[2])
 
     def instr_li(self, args: list) -> None:
         """

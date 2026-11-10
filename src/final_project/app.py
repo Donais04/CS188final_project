@@ -24,7 +24,8 @@ def hello():
     # program = "li $t0 10\nli $t1 5\nmul $t2 $t0 $t1\nmult $t0 $t1"
     # program = "li $t0 4294967295\nli $t1 2\nmult $t0 $t1"
     # program = "li $t0 -17\nli $t1 5\ndiv $t0 $t1"
-    program = "li $t0 10\nli $t1 12\nori $t2 $t0 15"
+    # program = "li $t0 10\nli $t1 12\nori $t2 $t0 15"
+    program = "li $t0 10\nsll $t1 $t0 1\nsrl $t2 $t0 1"
 
     compiler_obj.print_registers()
     compiler_obj.compile(program)
