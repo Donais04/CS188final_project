@@ -64,7 +64,7 @@ def setup_routes(app):
     app.route("/loginScreen")(loginScreen)
     app.route("/accountScreen")(accountScreen)
 
-    app.route("/")(index)
+  
     app.route("/hello")(hello)
     app.route("/account")(account)
 
@@ -76,5 +76,3 @@ if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
 
-def index():
-    return render_template("index.html")
