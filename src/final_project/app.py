@@ -24,9 +24,14 @@ def mainScreen():
 def loginScreen():
     return render_template("loginScreen.html")
 
+def accountScreen():
+    return render_template("accountScreen")
+
+
 def setup_routes(app):
     app.route("/")(mainScreen)
     app.route("/loginScreen")(loginScreen)
+    app.route("/accountScreen")(accountScreen)
 
 
 def run_app(debug: bool = True) -> None:

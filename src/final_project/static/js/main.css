@@ -1,11 +1,12 @@
 
-/* Overall layout */
+
 
 .workspace {
     display: grid;
     grid-template-columns: 195px minmax(0, 1fr) 360px;
     gap: 22px;
 
+background: #E2E2E2;
     padding: 25px;
     min-height: 100vh;
     box-sizing: border-box;
@@ -16,7 +17,7 @@
 
 .sidebar {
     border-radius: 6px;
-    border: 1px solid #000;
+    border: .5px solid #000;
     background: #fff;
     padding: 20px;
     min-width: 0;
@@ -36,6 +37,11 @@
     padding: 10px 0;
     gap: 12px;
 }
+.profile-icon{
+   width: 94px;
+    height: 94px;
+    aspect-ratio: 1/1;
+}
 
 .profile-section h5 {
     white-space: nowrap;
@@ -44,6 +50,8 @@
 .ad-section {
     background: #d8d8d8;
     padding: 12px;
+    width: 127px;
+    height: 212px;
     min-height: 170px;
     margin-top: auto;
     margin-bottom: 25px;
@@ -62,6 +70,7 @@
 /* Main workspace */
 
 .main-workspace {
+     border: .5px solid #000;
     border-radius: 6px;
     background: #B3B3B3;
     padding: 15px;
@@ -77,12 +86,39 @@
 
 .editor-toolbar,
 
+
 .console-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.button {
+    border-radius: 8px;
+    width: 80px;
+    height: 28px;
+    border: 0.5px solid #000;
+    background: rgba(255, 255, 255, 0.92);
 
+
+}
+.sidebarButton{
+    width: 144.3px;
+    height: 36.4px;
+    border-radius: 8px;
+    border: 0.5px solid #000;
+    background: rgba(255, 255, 255, 0.92);
+
+}
+.accountButton{
+    width: 144.3px;
+    height: 36.4px;
+    border-radius: 8px;
+border: 0.5px solid #000;
+background: rgba(255, 255, 255, 0.92);
+
+
+
+}
 .toolbar-left {
     
     display: flex;
@@ -132,9 +168,11 @@
 /* Registers */
 .registerBackground
 {
-border-radius: 14px;
-padding: 20;
-background: #B3B3B3;
+    border: .5px solid #000;
+    border-radius: 14px;
+    
+    padding: 20;
+    background: #B3B3B3;
 
 }
 .registers {
@@ -152,17 +190,24 @@ background: #B3B3B3;
     overflow-y: auto;
 }
 
-.register-heading {
-    background: #f8f8f8;
-    border: 1px solid #aaa;
-    border-radius: 6px;
-    padding: 8px;
-    font-weight: bold;
+.cardRegister{
+    width: 977.072px;
+    height: 358.598px;
+    border-radius: 14px;
+
 }
 
+.registerCardHeader{
+    border-radius: 8px;
+    border: 0.5px solid #000;
+    background: rgba(255, 255, 255, 0.92);
+    width: 111px;
+    
+
+}
 .register-table {
     width: 100%;
-    border-collapse: collapse;
+ 
 }
 
 .register-table th,
@@ -173,9 +218,15 @@ background: #B3B3B3;
 }
 
 .register-table tbody tr:nth-child(odd) {
-    background: #d8d8d8;
+    background: #e1dfdf;
 }
 
 .register-table tbody tr:nth-child(even) {
     background: white;
 }
+
+
+
+/* Account CSS */
+
+
