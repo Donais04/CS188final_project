@@ -12,6 +12,40 @@ def client(tmp_path):
     with app.test_client() as client:
         yield client
 
+#### NEWLY WRITTEN TESTS
+        
+
+
+
+
+def test_login(client):
+    register(client)
+    response = login(client)
+    assert response.status_code == 200
+    assert response.json["displayName"] == "Test User"
+
+def test_login_wrong_password(client):
+    register(client)
+    response = login(client, password="wrongpass123")
+    assert response.status_code == 401
+    assert response.json == {"message": "Incorrect username or password"}
+
+def test_login_unknown_user(client):
+    response = login(client, username="nobody")
+    assert response.status_code == 401
+    assert response.json == {"message": "Incorrect username or password"}
+
+def test_account_after_login(client):
+    register(client)
+    login(client)
+    response = client.get('/account')
+    assert response.status_code == 200
+
+
+#### END OF NEWLY WRITTEN TESTS
+
+
+
 
 def test_hello(client):
     response = client.get('/')
