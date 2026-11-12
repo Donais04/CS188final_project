@@ -31,6 +31,16 @@ def create_app(dbName = "testing.db"):
     setup_routes(app)
     return app
 
+
+def mainScreen():
+    return render_template("mainScreen.html")
+
+def loginScreen():
+    return render_template("loginScreen.html")
+
+def accountScreen():
+    return render_template("accountScreen")
+
 def hello():
     compiler_obj = Compiler()
     # program = "li $t0 10\nli $t1 5\nmul $t2 $t0 $t1\nmult $t0 $t1"
@@ -50,6 +60,10 @@ def account():
     return render_template("account.html")
 
 def setup_routes(app):
+    app.route("/")(mainScreen)
+    app.route("/loginScreen")(loginScreen)
+    app.route("/accountScreen")(accountScreen)
+
     app.route("/")(index)
     app.route("/hello")(hello)
     app.route("/account")(account)

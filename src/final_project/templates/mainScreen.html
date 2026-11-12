@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block title %}MIPS Code Editor{% endblock %}
+
+{% block content %}
+
+<div class="workspace">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        {% include "components/sidebar.html" %}
+    </aside>
+
+    <!-- Main Editor -->
+    <main class="main-workspace">
+
+        {% include "components/toolbar.html" %}
+
+        {% include "components/code_editor.html" %}
+
+        {% include "components/output_console.html" %}
+
+    </main>
+
+    <!-- Registers -->
+    <aside class="registers">
+        {% include "components/register_panel.html" %}
+    </aside>
+
+</div>
+
+{% endblock %}
