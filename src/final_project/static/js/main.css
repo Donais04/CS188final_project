@@ -241,3 +241,19 @@ background: rgba(255, 255, 255, 0.92);
     box-sizing: border-box;
     align-items: stretch;
 }
+
+.welcome{
+
+width: 1354px;
+height: 97px;
+border-radius: 6px;
+border: 0.5px solid #000;
+background: #FFF;
+}
+
+.projectCards{
+width: 1354px;
+height: 567px;
+border-radius: 6px;
+background: #B3B3B3;
+}

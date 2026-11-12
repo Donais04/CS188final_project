@@ -39,7 +39,7 @@ def loginScreen():
     return render_template("loginScreen.html")
 
 def accountScreen():
-    return render_template("accountScreen")
+    return render_template("accountScreen.html")
 
 def hello():
     compiler_obj = Compiler()
