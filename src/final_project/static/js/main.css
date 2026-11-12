@@ -230,3 +230,14 @@ background: rgba(255, 255, 255, 0.92);
 /* Account CSS */
 
 
+.workspaceAccount{
+     display: grid;
+    grid-template-columns: 195px minmax(0, 1fr) 360px;
+    gap: 22px;
+
+    background: #E2E2E2;
+    padding: 25px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    align-items: stretch;
+}
