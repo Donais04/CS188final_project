@@ -37,7 +37,7 @@ class Compiler:
 
     def program_split(self, program: str) -> list:
         """Divides the program from a big string into a list of individual words and floats"""
-        program_lines = program.split("\n")
+        program_lines = program.split("\r\n")
         program_words = []
         for i in range(len(program_lines)):
             program_words.append(program_lines[i].split(" "))
