@@ -1,16 +1,33 @@
+
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}MIPS Code Editor{% endblock %}
 
 {% block content %}
-    <main>
-      <p>I'm here</p>
+
+<div class="workspace">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        {% include "components/sidebar.html" %}
+    </aside>
+
+    <!-- Main Editor -->
+    <main class="main-workspace">
+
+        {% include "components/toolbar.html" %}
+
+        {% include "components/code_editor.html" %}
+
+        {% include "components/output_console.html" %}
+
     </main>
-{% endblock %}
 
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/button.js') }}"></script>
-{% endblock %}
+    <!-- Registers -->
+    <aside class="registers">
+        {% include "components/register_panel.html" %}
+    </aside>
 
-<!-- This is an HTML comment -->
-{# This is a Jinja comment #}
+</div>
+
+{% endblock %}

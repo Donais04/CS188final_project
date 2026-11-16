@@ -32,8 +32,8 @@ def create_app(dbName = "testing.db"):
     return app
 
 
-def mainScreen():
-    return render_template("mainScreen.html")
+def index():
+    return render_template("index.html")
 
 def loginScreen():
     return render_template("loginScreen.html")
@@ -60,7 +60,7 @@ def account():
     return render_template("account.html")
 
 def setup_routes(app):
-    app.route("/")(mainScreen)
+    app.route("/")(index)
     app.route("/loginScreen")(loginScreen)
     app.route("/accountScreen")(accountScreen)
 
