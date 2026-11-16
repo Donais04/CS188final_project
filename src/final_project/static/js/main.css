@@ -93,6 +93,28 @@ background: rgba(255, 255, 255, 0.92);
 .space{
     padding:20px;
 }
+.space1{
+    padding-right:10px;
+
+
+}
+
+.nameProgram{
+    
+
+width: 50%;
+  height: 36.4px;
+
+    border-radius: 8px;
+
+    border: .5px solid #000;
+    background: white;
+    cursor: pointer;
+    
+
+}
+
+
 .loginButton{
 width: 100%;
   height: 36.4px;
@@ -197,11 +219,25 @@ border: 0.5px solid #000;
 background: rgba(255, 255, 255, 0.92);
 
 
+}
+.toolBar{
 
+display: flex;
+align-items: center;
+
+
+}
+.bottomToolbar{
+
+display: flex;
+    justify-content: space-between;
+    align-items: center;
+padding-top: 15px;
 }
 .toolbar-left {
     
     display: flex;
+   margin-left: auto;
     gap: 12px;
 }
 
