@@ -85,6 +85,7 @@ background: rgba(255, 255, 255, 0.92);
     max-width: 160px;
     height: 45px;
     border-radius: 8px;
+    font-size: 400;
     border: .5px solid #000;
     background: white;
     cursor: pointer;
@@ -344,51 +345,234 @@ padding: 3px;
 
 
 /* Account Screen CSS */
-.welcome{
 
-width: 1354px;
-height: 97px;
-border-radius: 6px;
-border: 0.5px solid #000;
-background: #FFF;
+.accountWorkspace{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 
+    min-height: 100vh;
+    padding: 25px;
+    box-sizing: border-box;
+
+    background: #E2E2E2;
 }
 
-.projectCards{
-width: 1354px;
-height: 567px;
-border-radius: 6px;
-background: #B3B3B3;
+/* Welcome header */
+
+.welcome {
+    width: 100%;
+    min-height: 70px;
+
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
-.headerButtons{
-width: 200px;
-  margin-left: auto;
-  margin-right: 0;
+.welcome-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    min-height: 70px;
+    padding: 10px 30px;
+    gap: 20px;
+}
+
+.welcome-content h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+/* Header */
+
+.headerButtons {
+    display: flex;
+    align-items: center;
+    gap: 70px;
 }
 
 
-.changePassword{
-width: 160px;
-height: 36px;
+.deleteAccount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    background: transparent;
+
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.deleteAccount:hover {
+    color: #c62828;
+}
+
+
+
+.projects-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.projects-title {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 0 8px;
+}
+
+
+
+.projectCards {
+    width: 100%;
+    min-height: 410px;
+
+    padding: 17px;
+    box-sizing: border-box;
 border-radius: 8px;
 border: 0.5px solid #000;
-background: rgba(255, 255, 255, 0.92);
 
+    background: #B3B3B3;
+    border-radius: 6px;
 }
 
-.deleteIcon{
-width: 79px;
-height: 79px;
-aspect-ratio: 1/1;
+
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 35px 40px;
+    align-items: center;
 }
 
-.adPlaceholder{
 
-    width: 1354px;
-height: 126px;
-border-radius: 6px;
+
+.project-card {
+    height: 96px;
+border-radius: 8px;
 border: 0.5px solid #000;
-background: #FFF;
+
+    border-radius: 5px;
+    background: white;
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    background: #f2f2f2;
+    border-color: #555;
+}
+
+/* New project button */
+
+.new-project {
+    width: 66px;
+    height: 55px;
+
+    justify-self: center;
+
+    border-radius: 8px;
+border: 0.5px solid #000;
+
+    border-radius: 6px;
+    background: white;
+
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.new-project:hover {
+    background: #eee;
+}
+
+
+
+.adPlaceholder {
+    width: 100%;
+    min-height: 92px;
+
+    padding: 15px 30px;
+    box-sizing: border-box;
+
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: white;
+}
+
+.adPlaceholder p {
+    margin: 0;
+}
+
+
+@media (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .headerButtons {
+        gap: 15px;
+    }
+
+    .welcome-content h1 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 500px) {
+    .account-page {
+        padding: 12px;
+    }
+
+    .welcome-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .headerButtons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projectCards {
+        min-height: auto;
+    }
+}
+
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    width: fit-content;
+    padding: 8px 14px;
+
+    color: #222;
+    text-decoration: none;
+    font-size: 15px;
+
+    border: 1px solid #999;
+    border-radius: 6px;
+    background: white;
+
+    transition: background 0.2s;
+}
+
+.back-button:hover {
+    background: #d4d4d4;
+    color: #000;
 }

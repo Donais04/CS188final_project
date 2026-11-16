@@ -4,25 +4,32 @@
 
 {% block content %}
 
-<div class="workspace">
+<div class="accountWorkspace">
+
+    <a href="{{ url_for('index') }}" class="back-button">
+    <i class="bi bi-arrow-left"></i>
+    Back
+</a>
 
     <!-- welcome -->
     <aside class="welcome">
         {% include "components/welcome_header.html" %}
     </aside>
 
-    <!-- View projects -->
-    <main class="projectCards">
+   <section class="projects-section">
 
-        {% include "components/projects.html" %}
+        <h2 class="projects-title">View Projects</h2>
 
-    </main>
+        <div class="projectCards">
+            {% include "components/projects.html" %}
+        </div>
+
+    </section>
 
     <!-- ads -->
-    <div class="adPlaceholder">
-
-         <h1 class="mb-3">ads go here... </h1>
-        </div>
+    <section class="adPlaceholder">
+        <p>Ads will go here</p>
+    </section>
 
 
 
