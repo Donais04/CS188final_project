@@ -4,8 +4,35 @@
 
 {% block content %}
 
-<div class="workspaceAccount">
+<div class="accountWorkspace">
+
+    <a href="{{ url_for('index') }}" class="back-button">
+    <i class="bi bi-arrow-left"></i>
+    Back
+</a>
+
+    <!-- welcome -->
+    <aside class="welcome">
+        {% include "components/welcome_header.html" %}
+    </aside>
+
+   <section class="projects-section">
+
+        <h2 class="projects-title">View Projects</h2>
+
+        <div class="projectCards">
+            {% include "components/projects.html" %}
+        </div>
+
+    </section>
+
+    <!-- ads -->
+    <section class="adPlaceholder">
+        <p>Ads will go here</p>
+    </section>
 
 
 
 </div>
+
+{% endblock %}

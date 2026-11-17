@@ -2,40 +2,38 @@
 <div class="sidebar-content">
 
 
+<div class="profile-section">
 
-    <div class="profile-section">
+    <a href="{{ url_for('accountScreen') }}" class="profile-link">
 
         <div class="profile-icon">
-
             <i class="bi bi-person-circle"></i>
         </div>
 
-        <h5>NAME</h5>
+        <span class="profile-name">NAME</span>
+        <span class="T">Projects</span>
 
-        <button class="accountButton">
-            LOG IN
-        </button>
-
-
+    </a>
     </div>
+    <div class = "space"></div>
+    <button class="loginButton">
+        Login
+    </button>
 
 
-     <div class="ad-section">
-        Ads will go here
-    </div>
 
+
+    <div class="ad-section">
+            <span>Advertisement</span>
+            <p>Ads will go here</p>
+        </div>
     
     
 
-
-        <button class="sidebarButton">
-            Download
-        </button>
-
-        <button class="sidebarButton">
-            SAVE
-        </button>
-  
+<div class="sidebar-actions">
+    <button class="sidebarButton">Download</button>
+    <button class="sidebarButton">SAVE</button>
+</div>
 
 
  </div>

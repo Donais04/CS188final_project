@@ -45,13 +45,34 @@ def index():
         compiler_obj.compile(program)
         compiler_obj.print_registers()
 
-    return render_template("mainScreen.html")
+    registers = compiler_obj.get_registers()
+
+    return render_template("mainScreen.html", 
+                            reg_zero = registers["$zero"].get_value(), reg_at = registers["$at"].get_value(),
+                            reg_v0 = registers["$v0"].get_value(), reg_v1 = registers["$v1"].get_value(),
+                            reg_a0 = registers["$a0"].get_value(), reg_a1 = registers["$a1"].get_value(),
+                            reg_a2 = registers["$a2"].get_value(), reg_a3 = registers["$a3"].get_value(),
+                            reg_t0 = registers["$t0"].get_value(), reg_t1 = registers["$t1"].get_value(),
+                            reg_t2 = registers["$t2"].get_value(), reg_t3 = registers["$t3"].get_value(),
+                            reg_t4 = registers["$t4"].get_value(), reg_t5 = registers["$t5"].get_value(),
+                            reg_t6 = registers["$t6"].get_value(), reg_t7 = registers["$t7"].get_value(),
+                            reg_s0 = registers["$s0"].get_value(), reg_s1 = registers["$s1"].get_value(),
+                            reg_s2 = registers["$s2"].get_value(), reg_s3 = registers["$s3"].get_value(),
+                            reg_s4 = registers["$s4"].get_value(), reg_s5 = registers["$s5"].get_value(),
+                            reg_s6 = registers["$s6"].get_value(), reg_s7 = registers["$s6"].get_value(),
+                            reg_t8 = registers["$t8"].get_value(), reg_t9 = registers["$t9"].get_value(),
+                            reg_k0 = registers["$k0"].get_value(), reg_k1 = registers["$k1"].get_value(),
+                            reg_gp = registers["$gp"].get_value(), reg_sp = registers["$sp"].get_value(),
+                            reg_fp = registers["$fp"].get_value(), reg_ra = registers["$ra"].get_value(),
+                            reg_pc = registers["$pc"].get_value(), reg_hi = registers["$hi"].get_value(),
+                            reg_lo = registers["$lo"].get_value()
+                            )
 
 def loginScreen():
     return render_template("loginScreen.html")
 
 def accountScreen():
-    return render_template("accountScreen")
+    return render_template("accountScreen.html")
 
 
 @login_required
