@@ -159,6 +159,7 @@ class Database:
             return row[0] if row is not None else None
 
     def create_file(self, file_name: str, creator_id: int, public: bool):
+        print("create file")
         try:
             with self.conn:
                 self.conn.execute(

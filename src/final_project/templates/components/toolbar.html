@@ -28,9 +28,15 @@
 
         
           
-        <button class="button">
+        <button class="button" id="helpButton">
             Help
         </button>
+
+        <script>
+            document.getElementById("helpButton").addEventListener("click", function(event) {
+                alert("Implimented instructions: add, addi, sub, mul, mult, div, and, andi, or, ori, sll, srl, li\n\nSample program:\nli $t0 10\nli $t1 5\nmul $t2 $t0 $t1\nmult $t0 $t1");
+            });
+        </script>
 
 
         
