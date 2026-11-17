@@ -174,8 +174,8 @@ class Database:
         try:
             with self.conn:
                 self.conn.execute(
-                    "UPDATE files SET contents = ?, last_modified_at = CURRENT_TIMESTAMP WHERE file_id = ?",
-                    (new_contents, file_id)
+                    "UPDATE files SET contents = "+new_contents+", last_modified_at = CURRENT_TIMESTAMP WHERE file_id = ?",
+                    (file_id,)
                 )
             return True
         except sqlite3.Error:
