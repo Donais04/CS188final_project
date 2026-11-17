@@ -1,3 +1,5 @@
+/* CSS FOR MAINSCREEN */
+
 .workspace {
     display: grid;
     grid-template-columns: 195px minmax(0, 1fr) 360px;
@@ -73,7 +75,7 @@ background: rgba(255, 255, 255, 0.92);
     color: #222;
 }
 
-.profile-name {
+.profile- {
     font-size: 20px;
     font-weight: 600;
     color: #222;
@@ -380,7 +382,7 @@ padding: 3px;
 
 
 
-/* Account Screen CSS */
+/* CSS FOR ACCOUNTSCREEN */
 
 .accountWorkspace{
     display: flex;
@@ -611,4 +613,100 @@ border: 0.5px solid #000;
 .back-button:hover {
     background: #d4d4d4;
     color: #000;
+}
+
+
+
+
+/* CSS FOR LOGINSCREEN */
+
+
+.loginWorkspace {
+    display: grid;
+    place-items: center;
+
+    background: #E2E2E2;
+    padding: 25px;
+    min-height: 100vh;
+
+    box-sizing: border-box;
+}
+
+.loginBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: #FFF;
+    border-radius: 25px;
+
+    width: 100%;
+    max-width: 510px;
+
+    padding: 30px 35px;
+    box-sizing: border-box;
+}
+
+.loginBox h1 {
+    font-size: 48px;
+    margin: 0 0 35px;
+    text-align: center;
+}
+
+.loginBox form {
+    width: 100%;
+}
+
+.loginField {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 45px;
+ 
+}
+
+.loginField label {
+    font-size: 18px;
+
+}
+
+.textboxLogin {
+    width: 100%;
+    height: 36px;
+
+    border-radius: 8px;
+    border: 1px solid #999;
+
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+}
+
+.loginButton {
+    display: block;
+    margin: 0 auto;
+
+    width: 150px;
+    height: 50px;
+
+    background: white;
+    border: 1px solid #999;
+    border-radius: 8px;
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.loginButton:hover {
+    background: #EAEAEA;
+}
+
+.createAccount {
+    display: block;
+    margin-top: 20px;
+
+    text-align: center;
+    color: black;
+    font-weight: bold;
 }

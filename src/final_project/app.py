@@ -54,6 +54,7 @@ def accountScreen():
     return render_template("accountScreen.html")
 
 
+
 @login_required
 def account():
     return render_template("account.html")
